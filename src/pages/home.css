@@ -1,0 +1,49 @@
+#mainTitle {
+    font-size: 3rem;
+    text-align: center;
+}
+
+#mainDescription {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+#mainAnimation {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 35%;
+    height: 35%;
+}
+
+#mainSignUpButtonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+#mainSignUpButton {
+    border-radius: 25px;
+    font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 600px) {
+    #mainTitle {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    #mainDescription {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    #mainAnimation {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+        height: 50%;
+    }
+
+
+}
