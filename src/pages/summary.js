@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import DoneIcon from '@mui/icons-material/Done';
+import { IconButton } from '@mui/material';
 
-export default function Summary() {
+export default function Summary() { 
 
     const processJson = ( spendings ) => {
         console.log("spendings", spendings)
         const expensesMap = {}
         for ( var i = 0; i < spendings.length; i++ ) {
-            expensesMap[ spendings[i].person ] = spendings[i].amount;
+            expensesMap[ spendings[i].person ] = Number(spendings[i].amount);
         }
         return expensesMap
     }
@@ -99,9 +107,8 @@ export default function Summary() {
     const [payment, setPayment] = useState([])
 
     useEffect(() => {
-        const mainName = localStorage.getItem( "mainName" )
-        // const persons = JSON.parse( localStorage.getItem( "persons" ) )
-        const persons = [ { person: "A", amount: 7 }, { person: "B", amount: 10 }, { person: "C", amount: 12 }, { person: "D", amount: 5 } ]
+        const persons = JSON.parse( localStorage.getItem( "persons" ) )
+        //const persons = [ { person: "A", amount: 7 }, { person: "B", amount: 10 }, { person: "C", amount: 12 }, { person: "D", amount: 5 } ]
         const eventName = localStorage.getItem( "eventName" )
         var data = processJson(persons)
         const processed = normalSplit(data)
@@ -111,12 +118,42 @@ export default function Summary() {
 
     return (
         <div>
-            <h1 id='mainTitle'>Split Da Bill</h1>
-
-            <h2 id='subheader'>Summary</h2>
-            <div>
-               <p>Total amount spent: {total}</p>
-               {payment.map((line) => {return (<p>{line}</p>)})}
+            <h2 style={{marginLeft:"15vw"}}>Overview</h2>
+            <div style={{display:'flex', justifyContent:'center'}}>
+                <TableContainer component={Paper} sx={{ maxWidth: "70vw"}}>
+                    <Table sx={{ maxWidth: "70vw"}} aria-label="simple table">
+                        <TableBody>
+                                <TableRow>
+                                    <TableCell component="th" scope="row">
+                                        <b>Total Amount Spent</b>
+                                    </TableCell>
+                                    <TableCell align="right">{total}</TableCell>
+                                </TableRow>
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
+            <br />
+            <h2 style={{marginLeft:"15vw"}}>How to settle debts</h2>
+            <div style={{display:'flex', justifyContent:'center'}}>
+                {payment.map( (line, index) => (
+                    <TableContainer component={Paper} sx={{ maxWidth: "70vw"}} key='index'>
+                        <Table sx={{ maxWidth: "70vw"}} aria-label="simple table">
+                            <TableBody>
+                                    <TableRow>
+                                        <TableCell component="th" scope="row">
+                                            <b>{line}</b>
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            <IconButton color='success' size='large'>
+                                                <DoneIcon />
+                                            </IconButton>
+                                        </TableCell>
+                                    </TableRow>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                ))}
             </div>
         </div>
     )
