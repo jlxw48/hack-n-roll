@@ -4,14 +4,15 @@ import Dialog from '@mui/material/Dialog';
 import { DialogActions, DialogContent, TextField, Button, IconButton } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
-import { forEachOf, mapValues } from 'async';
 
 export default function FormModal(props) {
     const {isOpen, handleClose} = props
     const [persons, setPersons] = useState([
         {person: ''}
     ])
-
+    const [mainName, setMainName] = useState("")
+    const [eventName, setEventName] = useState("")
+    
     const addField = () => {
         setPersons([...persons, {person: ''}])
     }
@@ -28,12 +29,24 @@ export default function FormModal(props) {
     }
 
     const handleOnChangeField = (index, event) => {
-        console.log(event.target.name)
-        console.log(event.target.value)
         const fields = [...persons]
         fields[index]['person'] = event.target.value;
         setPersons(fields)
         console.log(fields)
+    }
+
+    const handleEventChangeField = (event) => {
+        setEventName(event.target.value)
+    }
+
+    const handleMainNameChange = (e) => {
+        setMainName(e.target.value)
+    }
+
+    const onFormSubmit = () => {
+        localStorage.setItem('eventName', eventName)
+        localStorage.setItem("persons", JSON.stringify(persons))
+        localStorage.setItem("mainName", mainName)
     }
 
     return (
@@ -46,7 +59,10 @@ export default function FormModal(props) {
                         autoFocus 
                         margin='dense'
                         fullWidth
-                        label="Event Name"/>
+                        label="Event Name"
+                        value={eventName}
+                        onChange={e => handleEventChangeField(e)}
+                        required={true}/>
                 </DialogContent>
                 <DialogTitle sx={{paddingBottom:0}}>Who to split?</DialogTitle>
                 <DialogContent>
@@ -56,7 +72,10 @@ export default function FormModal(props) {
                             margin='dense'
                             fullWidth
                             label="Your Name"
-                            sx={{width:"50%"}}/>
+                            sx={{width:"50%"}}
+                            required={true}
+                            value={mainName}
+                            onChange={e => handleMainNameChange(e)}/>
                         {persons.map( (personObj, index) => (
                             <div key={index}>
                                 <TextField 
@@ -66,22 +85,21 @@ export default function FormModal(props) {
                                     label={"Person " + (index+2)}
                                     sx={{width:"50%"}}
                                     value={personObj.person}
-                                    onChange={event => handleOnChangeField(index, event)}/>
+                                    onChange={event => handleOnChangeField(index, event)}
+                                    required={true}/>
                                 <IconButton onClick={() => removeField(index)} size='large' sx={{marginTop: '10px'}}>
                                     <RemoveIcon />
                                 </IconButton>
                                 <IconButton onClick={addField} size='large' sx={{marginTop: '10px'}}>
                                     <AddIcon />
                                 </IconButton>   
-                            </div>
-                            
-                            
+                            </div> 
                         ))}
                 </DialogContent>
                 <DialogActions>
-                    <Button>Calculate</Button>
+                    <Button onClick={onFormSubmit} href='/summary'>Next</Button>
                 </DialogActions>
-            </Dialog>
+            </Dialog>            
         </div>
     )
 }
