@@ -105,6 +105,7 @@ export default function Summary() {
 
     const [total, setTotal] = useState(0)
     const [payment, setPayment] = useState([])
+    const [paid, setPaid] = useState([])
 
     useEffect(() => {
         const persons = JSON.parse( localStorage.getItem( "persons" ) )
@@ -114,7 +115,15 @@ export default function Summary() {
         const processed = normalSplit(data)
         setTotal(processed.total)
         setPayment(processed.payment)
+        setPaid(Array(processed.payment.length).fill(0))
     }, [])
+
+    const onPaidClick = (e) => {
+        let newPaid = [... paid]
+        const i = Number(e.target.id)
+        newPaid[i] = 1
+        setPaid(newPaid)
+    }
 
     return (
         <div>
@@ -136,24 +145,25 @@ export default function Summary() {
             <br />
             <h2 style={{marginLeft:"15vw"}}>How to settle debts</h2>
             <div style={{display:'flex', justifyContent:'center'}}>
-                {payment.map( (line, index) => (
-                    <TableContainer component={Paper} sx={{ maxWidth: "70vw"}} key='index'>
+                    <TableContainer component={Paper} sx={{ maxWidth: "70vw"}}>
                         <Table sx={{ maxWidth: "70vw"}} aria-label="simple table">
                             <TableBody>
-                                    <TableRow>
+                                {payment.map( (line, index) => (
+                                    <TableRow key={index}>
                                         <TableCell component="th" scope="row">
                                             <b>{line}</b>
                                         </TableCell>
                                         <TableCell align="right">
-                                            <IconButton color='success' size='large'>
-                                                <DoneIcon />
-                                            </IconButton>
+                                            {paid[index] == 1 ? <p>Done</p> :
+                                            <IconButton color='success' size='large' onClick={(e) => onPaidClick(e)}>
+                                                <DoneIcon id={index}/>
+                                            </IconButton>}
                                         </TableCell>
                                     </TableRow>
+                                ))}
                             </TableBody>
                         </Table>
                     </TableContainer>
-                ))}
             </div>
         </div>
     )
