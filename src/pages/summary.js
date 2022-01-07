@@ -64,6 +64,7 @@ export default function Summary() {
     const [ total, setTotal ] = useState( 0 )
     const [ payment, setPayment ] = useState( [] )
     const [ paid, setPaid ] = useState( [] )
+    const eventName = localStorage.getItem('eventName')
 
     useEffect( () => {
         const persons = JSON.parse( localStorage.getItem( "persons" ) )
@@ -99,7 +100,7 @@ export default function Summary() {
                 </TableContainer>
             </div>
             <br />
-            <h2 style={{ marginLeft: "15vw" }}>How to settle debts</h2>
+            <h2 style={{ marginLeft: "15vw" }}>How to settle debts for {eventName}</h2>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <TableContainer component={Paper} sx={{ maxWidth: "70vw" }}>
                     <Table sx={{ maxWidth: "70vw" }} aria-label="simple table">
