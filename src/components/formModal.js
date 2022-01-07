@@ -16,17 +16,17 @@ export default function FormModal(props) {
     const [eventName, setEventName] = useState("")
     
     const addField = () => {
-        setPersons([...persons, {person: ''}])
+        setPersons( [ ...persons, { person: '' } ] )
     }
 
-    const removeField = (index) => {
-        let fields = [...persons]
+    const removeField = ( index ) => {
+        let fields = [ ...persons ]
 
-        if (fields.length === 1) {
-            alert("You must split with at least one other person!")
+        if ( fields.length === 1 ) {
+            alert( "You must split with at least one other person!" )
         } else {
-            fields.splice(index, 1)
-            setPersons(fields)
+            fields.splice( index, 1 )
+            setPersons( fields )
         }
     }
 
@@ -70,19 +70,19 @@ export default function FormModal(props) {
     return (
         <div>
             <Dialog open={isOpen} onClose={handleClose} fullWidth maxWidth='sm'>
-                <DialogTitle sx={{paddingBottom:0}}>New Event</DialogTitle>
+                <DialogTitle sx={{ paddingBottom: 0 }}>New Event</DialogTitle>
                 <DialogContent>
-                    <TextField 
-                        variant='standard' 
-                        autoFocus 
+                    <TextField
+                        variant='standard'
+                        autoFocus
                         margin='dense'
                         fullWidth
                         label="Event Name"
                         value={eventName}
-                        onChange={e => handleEventChangeField(e)}
-                        required={true}/>
+                        onChange={e => handleEventChangeField( e )}
+                        required={true} />
                 </DialogContent>
-                <DialogTitle sx={{paddingBottom:0}}>Who to split?</DialogTitle>
+                <DialogTitle sx={{ paddingBottom: 0 }}>Who to split?</DialogTitle>
                 <DialogContent>
                         <TextField 
                             variant='standard'
@@ -136,7 +136,7 @@ export default function FormModal(props) {
                 <DialogActions>
                     <Button onClick={onFormSubmit} href='/summary'>Next</Button>
                 </DialogActions>
-            </Dialog>            
+            </Dialog>
         </div>
     )
 }
