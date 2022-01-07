@@ -5,16 +5,16 @@ import { DialogActions, DialogContent, TextField, Button, IconButton } from '@mu
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 
-export default function FormModal(props) {
-    const {isOpen, handleClose} = props
-    const [persons, setPersons] = useState([
-        {person: '', amount:0}
-    ])
-    const [mainName, setMainName] = useState(
-        {person: '', amount:0}
+export default function FormModal( props ) {
+    const { isOpen, handleClose } = props
+    const [ persons, setPersons ] = useState( [
+        { person: '', amount: 0 }
+    ] )
+    const [ mainName, setMainName ] = useState(
+        { person: '', amount: 0 }
     )
-    const [eventName, setEventName] = useState("")
-    
+    const [ eventName, setEventName ] = useState( "" )
+
     const addField = () => {
         setPersons( [ ...persons, { person: '' } ] )
     }
@@ -30,41 +30,41 @@ export default function FormModal(props) {
         }
     }
 
-    const handleOnChangePersonField = (index, event) => {
-        const fields = [...persons]
-        fields[index]['person'] = event.target.value;
-        setPersons(fields)
-        console.log(fields)
+    const handleOnChangePersonField = ( index, event ) => {
+        const fields = [ ...persons ]
+        fields[ index ][ 'person' ] = event.target.value;
+        setPersons( fields )
+        console.log( fields )
     }
 
-    const handleOnChangeAmountField = (index, event) => {
-        const fields = [...persons]
-        fields[index]['amount'] = event.target.value;
-        setPersons(fields)
+    const handleOnChangeAmountField = ( index, event ) => {
+        const fields = [ ...persons ]
+        fields[ index ][ 'amount' ] = event.target.value;
+        setPersons( fields )
     }
 
-    const handleEventChangeField = (event) => {
-        setEventName(event.target.value)
+    const handleEventChangeField = ( event ) => {
+        setEventName( event.target.value )
     }
 
-    const handleMainNameChange = (e) => {
-        let field = JSON.parse(JSON.stringify(mainName))
+    const handleMainNameChange = ( e ) => {
+        let field = JSON.parse( JSON.stringify( mainName ) )
         field.person = e.target.value
-        setMainName(field)
+        setMainName( field )
     }
 
-    const handleMainAmountChange = (e) => {
-        let field = JSON.parse(JSON.stringify(mainName))
-        field.amount = Number(e.target.value)
-        setMainName(field)
+    const handleMainAmountChange = ( e ) => {
+        let field = JSON.parse( JSON.stringify( mainName ) )
+        field.amount = Number( e.target.value )
+        setMainName( field )
     }
 
 
     const onFormSubmit = () => {
-        let fields = [... persons]
-        fields.unshift(JSON.parse(JSON.stringify(mainName)))
-        localStorage.setItem('eventName', eventName)
-        localStorage.setItem("persons", JSON.stringify(fields))
+        let fields = [ ...persons ]
+        fields.unshift( JSON.parse( JSON.stringify( mainName ) ) )
+        localStorage.setItem( 'eventName', eventName )
+        localStorage.setItem( "persons", JSON.stringify( fields ) )
     }
 
     return (
@@ -84,54 +84,54 @@ export default function FormModal(props) {
                 </DialogContent>
                 <DialogTitle sx={{ paddingBottom: 0 }}>Who to split?</DialogTitle>
                 <DialogContent>
-                        <TextField 
-                            variant='standard'
-                            autoFocus 
-                            margin='dense'
-                            label="Your Name"
-                            sx={{width:"25%", m:1}}
-                            required={true}
-                            value={mainName.person}
-                            onChange={e => handleMainNameChange(e)}/>
-                        <TextField 
-                            variant='standard'
-                            className='amount'
-                            autoFocus 
-                            margin='dense'
-                            label="Amount Paid"
-                            sx={{width:"25%", m:1}}
-                            required={true}
-                            value={Number(mainName.amount)}
-                            onChange={e => handleMainAmountChange(e)}/>
-                        {persons.map( (personObj, index) => (
-                            <div key={index}>
-                                <TextField 
-                                    variant='standard' 
-                                    autoFocus 
-                                    margin='dense'
-                                    label={"Person " + (index+2)}
-                                    sx={{width:"25%", m:1}}
-                                    value={personObj.person}
-                                    onChange={event => handleOnChangePersonField(index, event)}
-                                    required={true}/>
-                                <TextField 
-                                    variant='standard' 
-                                    autoFocus 
-                                    margin='dense'
-                                    label="Amount Paid"
-                                    sx={{width:"25%", m:1}}
-                                    required={true}
-                                    value={personObj.amount}
-                                    type='number'
-                                    onChange={e => handleOnChangeAmountField(index, e)}/>
-                                <IconButton onClick={() => removeField(index)} size='large' sx={{marginTop: '10px'}}>
-                                    <RemoveIcon />
-                                </IconButton>
-                                <IconButton onClick={addField} size='large' sx={{marginTop: '10px'}}>
-                                    <AddIcon />
-                                </IconButton>   
-                            </div> 
-                        ))}
+                    <TextField
+                        variant='standard'
+                        autoFocus
+                        margin='dense'
+                        label="Your Name"
+                        sx={{ width: "25%", m: 1 }}
+                        required={true}
+                        value={mainName.person}
+                        onChange={e => handleMainNameChange( e )} />
+                    <TextField
+                        variant='standard'
+                        className='amount'
+                        autoFocus
+                        margin='dense'
+                        label="Amount Paid"
+                        sx={{ width: "25%", m: 1 }}
+                        required={true}
+                        value={Number( mainName.amount )}
+                        onChange={e => handleMainAmountChange( e )} />
+                    {persons.map( ( personObj, index ) => (
+                        <div key={index}>
+                            <TextField
+                                variant='standard'
+                                autoFocus
+                                margin='dense'
+                                label={"Person " + ( index + 2 )}
+                                sx={{ width: "25%", m: 1 }}
+                                value={personObj.person}
+                                onChange={event => handleOnChangePersonField( index, event )}
+                                required={true} />
+                            <TextField
+                                variant='standard'
+                                autoFocus
+                                margin='dense'
+                                label="Amount Paid"
+                                sx={{ width: "25%", m: 1 }}
+                                required={true}
+                                value={personObj.amount}
+                                type='number'
+                                onChange={e => handleOnChangeAmountField( index, e )} />
+                            <IconButton onClick={() => removeField( index )} size='large' sx={{ marginTop: '10px' }}>
+                                <RemoveIcon />
+                            </IconButton>
+                            <IconButton onClick={addField} size='large' sx={{ marginTop: '10px' }}>
+                                <AddIcon />
+                            </IconButton>
+                        </div>
+                    ) )}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={onFormSubmit} href='/summary'>Next</Button>

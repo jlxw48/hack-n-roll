@@ -12,7 +12,6 @@ export default function Summary() {
 
     // minimises number of senders
     const normalSplit = ( expensesMap ) => {
-        console.log( expensesMap )
         var total = 0;
         for ( var person in expensesMap ) {
             total += expensesMap[ person ]
