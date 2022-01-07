@@ -1,0 +1,37 @@
+#aboutContainer {
+    background-image: url("../images/aboutBackground.jpg");
+    min-height: calc(100vh - 65px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#aboutTitle {
+    font-size: 3rem;
+    text-align: center;
+    margin: 0;
+    color: white;
+}
+
+.aboutDescription {
+    font-size: 1.5rem;
+    color: white;
+    text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    #aboutTitle {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .aboutDescription {
+        font-size: 1rem;
+        color: white;
+    }
+
+    #aboutContainer {
+        background-image: url("../images/aboutBackground.jpg");
+        min-height: calc(100vh - 48px);
+    }
+}

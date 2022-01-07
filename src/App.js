@@ -5,7 +5,7 @@ import About from "./pages/about"
 function App() {
     return (
 		<Router>
-			<div className="App">
+			<div style={{backgroundColor:"rgb(249,249,249)", minHeight:"100vh"}}>
 				<NavigationBar />
 				<Routes>
 					<Route path="/" element={<Home />}/>

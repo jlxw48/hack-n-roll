@@ -15,8 +15,6 @@ export default function NavigationBar() {
                     <Box sx={{ flexGrow: 1, display: {md: 'flex' } }}>
                         <Button style={{color: "black"}} href="/">Home</Button>
                         <Button style={{color: "black"}} href="/about">About</Button>
-                        <Button style={{color: "black"}}>Sign up</Button>
-                        <Button style={{color: "black"}}>Login</Button>
                     </Box>
                 </Toolbar>
             </AppBar>
